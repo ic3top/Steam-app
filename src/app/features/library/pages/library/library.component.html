@@ -1,0 +1,28 @@
+<mat-card class="games-main-card">
+  <mat-card-title>
+    My Games
+  </mat-card-title>
+  <div class="games-wrapper">
+    <ng-container *ngIf="currentUserGames.length; else ifLibraryEmpty">
+      <app-game-card
+        *ngFor="let game of currentUserGames"
+        [templateRef]="actions"
+        [game]="game"
+      ></app-game-card>
+    </ng-container>
+    <ng-template #ifLibraryEmpty>
+      <h2>You don't have games yet, go and buy some...</h2>
+    </ng-template>
+  </div>
+</mat-card>
+
+<ng-template #actions let-game>
+  <button mat-raised-button color="primary" (click)="download(game.title)">Download</button>
+  <button
+    [cdkCopyToClipboard]="getGameLink(game._id)"
+    mat-raised-button
+    color="accent"
+  >
+    Copy link
+  </button>
+</ng-template>

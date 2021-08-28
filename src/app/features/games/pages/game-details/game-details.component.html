@@ -1,0 +1,27 @@
+<mat-card *ngIf="game$ | async as game">
+  <mat-card-header>
+    <mat-card-title>{{game.title}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <span class="game-price badge">
+      {{game.price}} $
+    </span>
+    <div class="game-image-wrapper">
+      <img class="game-image" mat-card-image [src]="game.img" [alt]="game.alt || 'Game preview'">
+    </div>
+    <div class="game-details">
+      <p class="game-description">
+        {{game.description}}
+      </p>
+      <div class="game-features">
+        <span class="badge">Genre: {{game.genre}}</span>
+        <span class="badge">Rating: {{game.rating}}/10</span>
+        <span class="badge">Year: {{game.year}}</span>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <app-add-button (addToLibrary)="onAddToLibrary()" [isInLibrary]="isInLibrary$ | async"></app-add-button>
+    <button mat-raised-button routerLink="/games">Go to games</button>
+  </mat-card-actions>
+</mat-card>

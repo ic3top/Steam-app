@@ -1,0 +1,20 @@
+<div class="fixed">
+  <mat-toolbar *ngIf="isDisplayed" color="primary" class="header">
+    <div class="logo-wrapper">
+      <img src="assets/steam-logo.png" alt="Steam logo">
+    </div>
+    <nav class="links-wrapper">
+      <a mat-button routerLink="/games" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Games</a>
+      <a mat-button routerLink="/library" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Library</a>
+      <a mat-button routerLink="/friends" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Friends</a>
+      <div class="spacer"></div>
+      <app-user-button
+        [isLoggedIn]="isUserLoggedIn"
+        [userName]="$any(userName$ | async)"
+        [requestsAmount]="$any(requestsAmount$ | async)"
+        (logout)="onLogout()"
+      ></app-user-button>
+    </nav>
+  </mat-toolbar>
+  <app-loader [isLoading]="(loaderService.isLoading | async)!" ></app-loader>
+</div>

@@ -1,0 +1,10 @@
+<mat-accordion multi>
+  <mat-expansion-panel *ngFor="let panel of panels">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{panel.header}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-container *ngTemplateOutlet="panel.ref"></ng-container>
+  </mat-expansion-panel>
+</mat-accordion>

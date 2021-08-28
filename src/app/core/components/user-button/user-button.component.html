@@ -1,0 +1,45 @@
+<button
+  *ngIf="isLoggedIn; else loginButton"
+  [matMenuTriggerFor]="profileMenu"
+  mat-button
+  aria-label="profile"
+>
+  {{userName}}
+  <mat-icon>account_circle</mat-icon>
+</button>
+
+<ng-template #loginButton>
+  <button mat-button routerLink="auth/login">
+    Login <mat-icon>login</mat-icon>
+  </button>
+</ng-template>
+
+<mat-menu #profileMenu="matMenu">
+  <a
+    mat-menu-item
+    routerLink="/profile"
+  >
+    <mat-icon>manage_accounts</mat-icon>
+    <span>Profile</span>
+  </a>
+  <a
+    mat-menu-item
+    routerLink="/friends"
+  >
+    <mat-icon
+      [matBadge]="requestsAmount"
+      matBadgePosition="before"
+      matBadgeColor="accent"
+    >
+      person_add
+    </mat-icon>
+    <span>Friend requests</span>
+  </a>
+  <button
+    mat-menu-item
+    (click)="logout.emit()"
+  >
+    <mat-icon>logout</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>

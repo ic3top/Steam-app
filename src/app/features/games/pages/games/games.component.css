@@ -1,0 +1,11 @@
+.board {
+  margin-top: 2em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.games-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-gap: 1em;
+}

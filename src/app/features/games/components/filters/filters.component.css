@@ -1,0 +1,20 @@
+.filters-wrapper {
+  gap: 1em;
+  padding: 2em;
+  position: sticky;
+  top: 40px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-slider {
+  min-width: 200px;
+}
+
+.price-text {
+  height: 20px;
+  text-align: center;
+}

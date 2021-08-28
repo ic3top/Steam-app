@@ -1,0 +1,14 @@
+<mat-list *ngIf="profileInfo$ | async as user" role="list">
+  <mat-list-item *ngIf="user.age">
+    <strong>Age</strong>: {{user.age}}
+  </mat-list-item>
+  <mat-list-item>
+    <strong>Joined</strong>: {{user.createdAt | date: 'MMM d, y'}}
+  </mat-list-item>
+  <mat-list-item>
+    <strong>Amount of owned games</strong>: {{user.games.length}}
+  </mat-list-item>
+  <mat-list-item>
+    <strong>Amount of friends</strong>: {{user.friends.length}}
+  </mat-list-item>
+</mat-list>

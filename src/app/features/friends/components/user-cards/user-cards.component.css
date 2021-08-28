@@ -1,0 +1,9 @@
+.card-user-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-card {
+  margin-top: 2em;
+}

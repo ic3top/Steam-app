@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-title>Games</mat-card-title>
+  <mat-card-content>
+    <app-search-form (queryInput)="onSearchInput($event)" labelText="Search Games"></app-search-form>
+    <h2>Featured Games</h2>
+    <div class="board">
+      <div class="games-wrapper">
+        <app-game-card *ngFor="let game of (games$ | async)" [game]="game" [templateRef]="actions"></app-game-card>
+      </div>
+      <app-filters (changeFilters)="onChangeFilters($event)" [genres]="GENRES"></app-filters>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #actions let-game>
+  <app-add-button
+    [fullWidth]="true"
+    [isInLibrary]="isInLibrary$(game._id) | async"
+    (addToLibrary)="addGameToLibrary(game._id)"
+  ></app-add-button>
+</ng-template>
