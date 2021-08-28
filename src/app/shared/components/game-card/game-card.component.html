@@ -1,4 +1,4 @@
-<mat-card class="game-card">
+<mat-card class="game-card" *ngIf="game">
   <mat-card-header [routerLink]="'../games/' + game._id">
     <mat-card-title>{{game.title}}</mat-card-title>
     <mat-card-subtitle>
