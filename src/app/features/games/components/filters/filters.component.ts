@@ -12,16 +12,17 @@ export class FiltersComponent implements OnInit {
 
   @Output() changeFilters = new EventEmitter<{ maxPrice: number, genres: GameGenres[] }>();
 
-  filtersForm: FormGroup = this.fb.group({
-    maxPrice: [0],
-    genresCheckboxes: this.fb.array(this.genres.map(() => true)),
-  });
+  filtersForm!: FormGroup
 
   anyGenreChecked: boolean = true;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.filtersForm = this.fb.group({
+      maxPrice: [0],
+      genresCheckboxes: this.fb.array(this.genres.map(() => true)),
+    });
     this.emitChangeFilters();
   }
 
