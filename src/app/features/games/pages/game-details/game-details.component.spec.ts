@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GameDetailsComponent } from './game-details.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SharedModule } from '../../../../shared/shared.module';
 
 describe('GameDetailsComponent', () => {
   let component: GameDetailsComponent;
@@ -9,6 +12,7 @@ describe('GameDetailsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ GameDetailsComponent ],
+      imports: [ HttpClientTestingModule, RouterTestingModule, SharedModule ],
     })
       .compileComponents();
   });

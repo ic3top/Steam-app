@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FriendRequestsComponent } from './friend-requests.component';
+import { SharedModule } from '../../../../shared/shared.module';
 
 describe('FriendRequestsComponent', () => {
   let component: FriendRequestsComponent;
@@ -9,6 +10,7 @@ describe('FriendRequestsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ FriendRequestsComponent ],
+      imports: [ SharedModule ],
     })
       .compileComponents();
   });

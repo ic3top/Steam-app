@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, Input, TemplateRef } from '@angular
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameCardComponent {
-  @Input() templateRef!: TemplateRef<any>;
+  @Input() templateRef?: TemplateRef<any>;
 
-  @Input() game!: Game;
+  @Input() game?: Game;
 }

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToggleButtonComponent } from './toggle-button.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ToggleButtonComponent', () => {
   let component: ToggleButtonComponent;
@@ -9,6 +10,7 @@ describe('ToggleButtonComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ToggleButtonComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     })
       .compileComponents();
   });

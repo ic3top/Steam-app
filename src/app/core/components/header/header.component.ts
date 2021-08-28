@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { LoaderService } from '../../services/loader.service';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',

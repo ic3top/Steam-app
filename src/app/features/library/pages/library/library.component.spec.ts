@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LibraryComponent } from './library.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { SharedModule } from '../../../../shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('LibraryComponent', () => {
   let component: LibraryComponent;
@@ -9,6 +14,15 @@ describe('LibraryComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ LibraryComponent ],
+      imports: [ RouterTestingModule, SharedModule, BrowserAnimationsModule ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useClass: class {
+            snapshot = { data: { userGames: of([]) } };
+          },
+        },
+      ],
     })
       .compileComponents();
   });
