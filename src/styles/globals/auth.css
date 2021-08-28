@@ -1,0 +1,22 @@
+.app-auth-wrapper {
+  max-width: 400px;
+  margin: 4em auto;
+  text-align: center;
+}
+
+.app-full-width-field {
+  display: block!important;
+  margin-top: 1em;
+}
+
+.app-login-link {
+  position: absolute!important;
+  left: 0;
+  top: 0;
+}
+
+.app-buttons-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
