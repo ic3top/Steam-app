@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, filter, map, pluck, switchMap, tap } from 'rxjs/operators';
@@ -9,7 +9,10 @@ import { Store } from './store';
   providedIn: 'root',
 })
 export class UserService extends Store<CurrentUser> {
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    @Inject('BASE_URL') private baseUrl: string
+  ) {
     super();
   }
 
@@ -23,14 +26,14 @@ export class UserService extends Store<CurrentUser> {
   }
 
   fetchUserInfo$() {
-    return this.http.get<{ user: CurrentUser }>('https://cryptic-stream-35838.herokuapp.com/steam/profile/me')
+    return this.http.get<{ user: CurrentUser }>(`${this.baseUrl}/profile/me`)
       .pipe(
         map(({ user }) => user),
       );
   }
 
   deleteUser$() {
-    return this.http.delete('https://cryptic-stream-35838.herokuapp.com/steam/profile/me');
+    return this.http.delete(`${this.baseUrl}/profile/me`);
   }
 
   editUserInfo$(email: string, userName: string, age?: number) {
@@ -39,7 +42,7 @@ export class UserService extends Store<CurrentUser> {
       userName,
       ...(age && { age }),
     };
-    return this.http.patch('https://cryptic-stream-35838.herokuapp.com/steam/profile/me', body)
+    return this.http.patch(`${this.baseUrl}/profile/me`, body)
       .pipe(switchMap(() => this.updateCurrentUserInfo$()));
   }
 
@@ -51,7 +54,7 @@ export class UserService extends Store<CurrentUser> {
       ),
       catchError((err) => {
         if (err.status === 401) {
-          console.log('Unauthorized user');
+          console.warn('Unauthorized user');
         }
         return of({});
       }),

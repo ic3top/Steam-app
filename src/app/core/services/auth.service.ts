@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { switchMap, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -20,6 +20,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private userService: UserService,
+    @Inject('BASE_URL') private baseUrl: string
   ) {
     if (this.isLoggedIn()) {
       this.userService.updateCurrentUserInfo$().subscribe();
@@ -29,7 +30,7 @@ export class AuthService {
   }
 
   login$(password: string, email: string) {
-    return this.http.post<LoginResponse>('https://cryptic-stream-35838.herokuapp.com/steam/auth/login', {
+    return this.http.post<LoginResponse>(`${this.baseUrl}/auth/login`, {
       password,
       email,
     }).pipe(
@@ -47,7 +48,7 @@ export class AuthService {
       ...(age && { age }),
     };
     return this.http.post<RegisterResponse>(
-      'https://cryptic-stream-35838.herokuapp.com/steam/auth/register',
+      `${this.baseUrl}/auth/register`,
       body,
     );
   }
