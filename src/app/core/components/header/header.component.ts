@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
-  @Input() isDisplayed: boolean = false;
+  @Input() isDisplayed = false;
 
   currentUserInfo$!: Observable<CurrentUser>;
 
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
     private router: Router,
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.currentUserInfo$ = this.userService.getCurrentUserInfo$();
   }
 
@@ -33,15 +33,13 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/auth/login']);
   }
 
-  get isUserLoggedIn() {
+  get isUserLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
   get requestsAmount$() {
     return this.currentUserInfo$.pipe(
-      map(user => {
-        return user.friendRequests.filter(({ to }) => to._id === user._id).length;
-      }),
+      map(user => user.friendRequests.filter(({ to }) => to._id === user._id).length),
     );
   }
 

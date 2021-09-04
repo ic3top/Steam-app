@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, pluck, shareReplay, switchMap } from 'rxjs/operators';
 import { UserService } from '../../../core/services/user.service';

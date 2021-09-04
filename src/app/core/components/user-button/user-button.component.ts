@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserButtonComponent {
-  @Output() logout = new EventEmitter();
+  @Output() logout = new EventEmitter<void>();
 
   @Input() isLoggedIn: boolean = false;
 

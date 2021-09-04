@@ -12,7 +12,7 @@ export class FiltersComponent implements OnInit {
 
   @Output() changeFilters = new EventEmitter<{ maxPrice: number, genres: GameGenres[] }>();
 
-  filtersForm!: FormGroup
+  filtersForm!: FormGroup;
 
   anyGenreChecked: boolean = true;
 

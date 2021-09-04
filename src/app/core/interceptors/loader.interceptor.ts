@@ -18,10 +18,7 @@ export class LoaderInterceptor implements HttpInterceptor {
   constructor(private loaderService: LoaderService) { }
 
   removeRequest(req: HttpRequest<any>) {
-    const i = this.requests.indexOf(req);
-    if (i >= 0) {
-      this.requests.splice(i, 1);
-    }
+    this.requests.filter(request => request != req);
     this.loaderService.isLoading.next(this.requests.length > 0);
   }
 
@@ -32,21 +29,22 @@ export class LoaderInterceptor implements HttpInterceptor {
 
     return new Observable((observer: any) => {
       const subscription = next.handle(req)
-        .subscribe(
-          event => {
+        .subscribe({
+          next: event => {
             if (event instanceof HttpResponse) {
               this.removeRequest(req);
               observer.next(event);
             }
           },
-          err => {
+          error: err => {
             this.removeRequest(req);
             observer.error(err);
           },
-          () => {
+          complete: () => {
             this.removeRequest(req);
             observer.complete();
-          });
+          },
+        });
       // remove request from queue when cancelled
       return () => {
         this.removeRequest(req);

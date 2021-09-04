@@ -1,9 +1,10 @@
-import {Inject, Injectable} from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, filter, map, pluck, switchMap, tap } from 'rxjs/operators';
+import { catchError, filter, map, switchMap, tap } from 'rxjs/operators';
 import { Store } from './store';
 
+interface ResMessage { message: string }
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ import { Store } from './store';
 export class UserService extends Store<CurrentUser> {
   constructor(
     private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string
+    @Inject('BASE_URL') private baseUrl: string,
   ) {
     super();
   }
@@ -19,24 +20,23 @@ export class UserService extends Store<CurrentUser> {
   getCurrentUserInfo$(): Observable<CurrentUser> {
     return this.getState$()
       .pipe(
-        pluck('entities'),
-        map(({ currentUserInfo }) => currentUserInfo),
+        map(({ entities: { currentUserInfo } }) => currentUserInfo),
         filter(val => !!val),
       );
   }
 
-  fetchUserInfo$() {
+  fetchUserInfo$(): Observable<CurrentUser> {
     return this.http.get<{ user: CurrentUser }>(`${this.baseUrl}/profile/me`)
       .pipe(
         map(({ user }) => user),
       );
   }
 
-  deleteUser$() {
-    return this.http.delete(`${this.baseUrl}/profile/me`);
+  deleteUser$(): Observable<ResMessage> {
+    return this.http.delete<ResMessage>(`${this.baseUrl}/profile/me`);
   }
 
-  editUserInfo$(email: string, userName: string, age?: number) {
+  editUserInfo$(email: string, userName: string, age?: number): Observable<CurrentUser | {}> {
     const body = {
       email,
       userName,
@@ -46,7 +46,7 @@ export class UserService extends Store<CurrentUser> {
       .pipe(switchMap(() => this.updateCurrentUserInfo$()));
   }
 
-  updateCurrentUserInfo$() {
+  updateCurrentUserInfo$(): Observable<CurrentUser | {}> {
     return this.fetchUserInfo$().pipe(
       tap(currentUserInfo => this.setState({
         entities: { currentUserInfo },
