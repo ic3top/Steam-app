@@ -1,0 +1,20 @@
+<button
+  *ngIf="isInLibrary; else addButton"
+  mat-raised-button
+  disabled
+  [class.full-width]="fullWidth"
+>
+  Already in library
+</button>
+
+
+<ng-template #addButton>
+  <button
+    (click)="addToLibrary.emit()"
+    mat-raised-button
+    color="primary"
+    [class.full-width]="fullWidth"
+  >
+    Add to library
+  </button>
+</ng-template>

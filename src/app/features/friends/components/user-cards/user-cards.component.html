@@ -1,0 +1,6 @@
+<mat-card class="card-user" *ngFor="let user of users">
+  <mat-card-content class="card-user-content">
+    <span>{{user.userName}}</span>
+    <ng-container *ngTemplateOutlet="actions; context: {$implicit: user._id}"></ng-container>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,44 @@
+.mat-card-content {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 300px 1fr;
+  grid-gap: 2em;
+}
+
+.game-image-wrapper {
+  max-width: 300px;
+}
+
+.game-image {
+  max-width: 100%;
+}
+
+.game-description {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.game-features {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 16px;
+  margin-top: 3em;
+  gap: .5em;
+}
+
+.badge {
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: #FFFFFF;
+  background-color: #9a00c2;
+}
+
+.game-price {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #e6ad02;
+}

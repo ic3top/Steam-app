@@ -1,0 +1,57 @@
+<mat-card class="mt-2em">
+  <mat-card-title>Friends</mat-card-title>
+  <mat-card-content>
+    <app-search-form (queryInput)="onSearchInput($event)" labelText="Search new Friends"></app-search-form>
+
+    <app-accordion
+      [panels]="[{header: 'My Friends', ref: friends}, {header: 'Friend Requests', ref: requests}]"
+    ></app-accordion>
+
+    <ng-container *ngIf="(queryResult$ | async)?.length; else noResults">
+      <h2 class="mt-2em">You might wanna play with...</h2>
+      <app-user-cards
+        [users]="(queryResult$ | async)!"
+        [actions]="usersActions"
+      ></app-user-cards>
+    </ng-container>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #friends>
+  <app-user-cards
+    *ngIf="currentUserInfo$ | async as user"
+    [users]="user.friends"
+    [actions]="friendsActions"
+  ></app-user-cards>
+</ng-template>
+
+<ng-template #requests>
+  <app-friend-requests
+    *ngIf="(friendRequests$ | async)?.length; else noFriendRequests"
+    [friendRequests]="$any(friendRequests$ | async)"
+    (accept)="onAcceptRequest($event)"
+    (decline)="onDeclineRequest($event)"
+  ></app-friend-requests>
+
+  <ng-template #noFriendRequests>
+    <p>You've got no friend requests for now</p>
+  </ng-template>
+</ng-template>
+
+<ng-template #friendsActions let-id>
+  <button mat-raised-button (click)="onRemoveFriend(id)" color="warn">Remove friend</button>
+</ng-template>
+
+<ng-template #usersActions let-id>
+  <ng-container *ngIf="isRequestSent$(id) | async; else addFriendButton">
+    <button mat-raised-button disabled>Request sent</button>
+  </ng-container>
+
+  <ng-template #addFriendButton>
+    <button mat-raised-button (click)="onAddFriend(id)" color="primary">Add friend</button>
+  </ng-template>
+</ng-template>
+
+<ng-template #noResults>
+  <p class="new-friends-text">Search for some new friends...!</p>
+</ng-template>

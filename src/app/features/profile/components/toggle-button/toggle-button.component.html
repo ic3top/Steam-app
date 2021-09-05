@@ -1,0 +1,22 @@
+<a
+  *ngIf="isInfoOpened; else cancel_button"
+  mat-mini-fab
+  routerLink="edit"
+  matTooltip="Edit profile"
+  matTooltipPosition="right"
+  aria-label="edit profile"
+>
+  <mat-icon>edit</mat-icon>
+</a>
+
+<ng-template #cancel_button>
+  <a
+    mat-mini-fab
+    routerLink="info"
+    matTooltip="Cancel editing"
+    matTooltipPosition="right"
+    aria-label="cancel editing"
+  >
+    <mat-icon>close</mat-icon>
+  </a>
+</ng-template>

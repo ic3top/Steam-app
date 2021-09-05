@@ -1,0 +1,39 @@
+<div class="flex-column filters-wrapper" [formGroup]="filtersForm">
+  <div>
+    <h3>Max Price</h3>
+    <mat-slider
+      formControlName="maxPrice"
+      aria-label="price"
+      [displayWith]="formatPrice"
+      (change)="emitChangeFilters()"
+      thumbLabel
+    ></mat-slider>
+    <p class="price-text">
+      <span *ngIf="isAnyPrice">Any price</span>
+    </p>
+  </div>
+  <div *ngIf="genres.length > 0" class="flex-column">
+    <h3>Genres</h3>
+    <mat-checkbox
+      [(ngModel)]="anyGenreChecked"
+      [ngModelOptions]="{standalone: true}"
+      (change)="markAllGenres()"
+      [disabled]="anyGenreChecked"
+    >
+      Any genre
+    </mat-checkbox>
+    <ng-container
+      formArrayName="genresCheckboxes"
+      *ngFor="let genre of genres; let i = index"
+    >
+      <mat-checkbox
+        color="primary"
+        [formControlName]="i"
+        (change)="changeGenres()"
+      >
+        {{genre}}
+      </mat-checkbox>
+    </ng-container>
+  </div>
+
+</div>

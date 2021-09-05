@@ -1,0 +1,19 @@
+<mat-card-content>
+  <mat-card *ngFor="let request of friendRequests" class="card-request">
+    <mat-card-title>Request from {{request.from.userName}}</mat-card-title>
+    <mat-card-subtitle>Sent at {{request.addedAt | date: 'MMM/dd, h a'}}</mat-card-subtitle>
+    <button
+      mat-icon-button
+      class="button-close"
+      aria-label="Decline request"
+      color="warn"
+      (click)="decline.emit(request._id)"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="accept.emit(request._id)">Accept</button>
+      <button mat-raised-button color="warn" (click)="decline.emit(request._id)">Decline</button>
+    </mat-card-actions>
+  </mat-card>
+</mat-card-content>

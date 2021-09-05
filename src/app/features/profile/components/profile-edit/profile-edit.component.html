@@ -1,0 +1,24 @@
+<form *ngIf="editProfileForm" [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
+  <mat-error *ngIf="formInvalid">
+    Seems like you specified already registered email or name...
+  </mat-error>
+  <mat-form-field class="full-width-input">
+    <input matInput type="email" placeholder="Email" formControlName="email" required>
+    <mat-error>
+      Please provide a valid email address
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="full-width-input">
+    <input matInput type="text" placeholder="Name" formControlName="userName" required>
+    <mat-error>
+      Please provide a valid name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="full-width-input">
+    <input matInput type="text" placeholder="Age" formControlName="age">
+    <mat-error>
+      Please provide a valid age
+    </mat-error>
+  </mat-form-field>
+  <button class="save-button" mat-raised-button color="primary">Save</button>
+</form>

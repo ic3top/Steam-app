@@ -1,0 +1,20 @@
+.profile-card {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.profile-header-image {
+  font-size: 46px;
+  text-align: center;
+}
+
+.mat-card-actions {
+  margin-top: 5em;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.edit-profile-button {
+  margin-left: auto;
+}

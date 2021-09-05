@@ -1,0 +1,5 @@
+<form [formGroup]="searchForm" (input)="onInput()">
+  <mat-form-field>
+    <input matInput type="text" [placeholder]="labelText" formControlName="query">
+  </mat-form-field>
+</form>
