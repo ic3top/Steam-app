@@ -37,7 +37,7 @@ import { LoaderService } from './services/loader.service';
     LoaderService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: 'BASE_URL', useValue: 'https://cryptic-stream-35838.herokuapp.com/steam' },
+    { provide: 'BASE_URL', useValue: 'https://steam-app-server.onrender.com/steam' },
   ],
 })
 export class CoreModule {
